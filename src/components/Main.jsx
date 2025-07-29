@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 
 export default function Main() {
   /*   const urlMovies = "https://api.themoviedb.org/3/search/movie";
@@ -12,11 +12,11 @@ export default function Main() {
         setMovies(data);
       });
   } */
-  return (
+/*  return (
     <main>
       <div className="container">
         <h2>Risultati</h2>
       </div>
     </main>
   );
-}
+} */

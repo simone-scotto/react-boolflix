@@ -1,12 +1,12 @@
-import { useState } from "react";
+/* import { useState } from "react";
 
 export default function Header() {
   const [movies, setMovies] = useState(null);
   const [query, setQuery] = useState("");
 
-  const urlMovies = `https://api.themoviedb.org/3/search/movie?api_key=${
-    import.meta.env.VITE_API_KEY
-  }&query=${query}`;
+  const key = import.meta.env.VITE_API_KEY;
+
+  const urlMovies = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${query}`;
 
   function handleClickMovies() {
     fetch(urlMovies)
@@ -22,7 +22,7 @@ export default function Header() {
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             <img
-              src="../../public/simonflixlogo.png"
+              src="../../public/Logo2.png"
               alt=""
               width="30"
               height="24"
@@ -51,3 +51,4 @@ export default function Header() {
     </header>
   );
 }
+ */
