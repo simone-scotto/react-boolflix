@@ -7,12 +7,22 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode'
 import Main from "./components/Main";
  */
 function App() {
+
+
+  //usestate
   const [movies, setMovies] = useState([]);
+  const [tvShows, setTvShows] = useState([])
   const [query, setQuery] = useState("");
 
   const key = import.meta.env.VITE_API_KEY;
 
+  const urlTV = `https://api.themoviedb.org/3/search/tv?api_key=${key}&query=${query}`
+
   const urlMovies = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${query}`;
+
+
+  const urlImg = `https://image.tmdb.org/t/p/`
+
 
   function handleClickMovies(e) {
     e.preventDefault()
@@ -27,7 +37,18 @@ function App() {
         console.log(filteredMovies);
               
       }); 
-  }
+
+       fetch(urlTV)
+      .then((res) => res.json()) 
+      .then((data) => {
+       const filteredTv = data.results
+       setTvShows(filteredTv)
+       console.log(filteredTv);
+       
+
+      });
+    }
+          
   return (
     <>
       <header>
@@ -64,32 +85,82 @@ function App() {
       </header>
       <main>
         <div className="container">
-          <h2>Risultati</h2>
-          <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
-          
-            {movies.map((movie) => {
-              
-              return (
-                <div key={movie.id} className="col">
-                  <ul>
-                    <li>{movie.title}</li>
-                    <li>{movie.original_title}</li>
-                    <li>{movie.original_language}
-                      
-                      <img className="flag" src={`https://unpkg.com/language-icons/icons/${movie.original_language}.svg`} alt="" />
+          <section className="movies">
+            <h2>Film</h2>
+            <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+            
+              {movies.map((movie) => {
+                
+                return (
+                  <div className="col" key={movie.id}>
                     
-                    </li>
-                    <li>{movie.vote_average}</li>
-                  </ul>
-                </div>
-              )
-            })}
-          </div>
+                      <div className="card h-100">
+                        <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt="immagine non disponibile" />
+                        <div className="card-body">
+                          <h5 className="card-title">{movie.title}</h5>
+                          <p className="card-text">{movie.original_title}</p>
+                          <p className="card-text">{movie.original_language === "en" ? (
+                          <img src="/flags/united-states-of-america-flag-3d-icon-16.png" alt="US" />
+                        ) : movie.original_language === "fr" ? (
+                          <img src="/flags/france-flag-3d-icon-16.png" alt="France" />
+                        ) : movie.original_language === "ja" ? (
+                          <img src="\flags\japan-flag-3d-icon-16 (1).png" alt="Japan" />
+                        ): movie.original_language === "zh" ? (
+                          <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
+                          <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
+                        )}</p>
+                        <p>{movie.vote_average}</p>
+                        </div>
+                      </div>
+                    
+                  </div>
+                  
+                )
+              })}
+            </div>
+          </section>
+          <section className="tv">
+            <h2>Serie TV</h2>
+            <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+            
+              {tvShows.map((tvShow) => {
+                
+                return (
+                  <div className="col" key={tvShow.id}>
+                    
+                      <div className="card h-100">
+                        <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${tvShow.poster_path}`} alt="immagine non disponibile" />
+                        <div className="card-body">
+                          <h5 className="card-title">{tvShow.name}</h5>
+                          <p className="card-text">{tvShow.original_name}</p>
+                          <p className="card-text">{tvShow.original_language === "en" ? (
+                          <img src="/flags/united-states-of-america-flag-3d-icon-16.png" alt="US" />
+                        ) : tvShow.original_language === "fr" ? (
+                          <img src="/flags/france-flag-3d-icon-16.png" alt="France" />
+                        ) : tvShow.original_language === "ja" ? (
+                          <img src="\flags\japan-flag-3d-icon-16 (1).png" alt="Japan" />
+                        ): tvShow.original_language === "zh" ? (
+                          <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
+                          <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
+                        )}</p>
+                        <p>{tvShow.vote_average}</p>
+                        </div>
+                      </div>
+                    
+                  </div>
+                  
+                )
+              })}
+            </div>
+          </section>
+
+
           
         </div>
       </main>
     </>
   );
+  
 }
 
 export default App;
