@@ -155,8 +155,8 @@ function tagliaDescrizione (text, maxWords) {
                         
                           src={tvShow.poster_path ? `https://image.tmdb.org/t/p/w342/${tvShow.poster_path}` : `/flags/anteprima-non-disponibile-2.jpg`}/>
                         <div className="card-img-overlay infos">
-                          <h5 className="card-title">{tvShow.title}</h5>
-                          <p className="card-text">Titolo Originale: {tvShow.original_title}</p>
+                          <h5 className="card-title">{tvShow.name}</h5>
+                          <p className="card-text">Titolo Originale: {tvShow.original_name}</p>
                           <p className="card-text">Lingua Originale: {tvShow.original_language === "en" ? (
                           <img src="/flags/united-states-of-america-flag-3d-icon-16.png" alt="US" />
                           ) : tvShow.original_language === "fr" ? (
