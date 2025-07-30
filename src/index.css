@@ -16,3 +16,24 @@ li {
 .flag{
   width: 2rem;
 }
+
+.col:hover {
+  cursor: pointer;
+  .infos {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.758);
+    color: white;
+  }
+  
+  
+} 
+
+.card-img {
+  height: 100%;
+}
+
+.infos {
+  opacity: 0;
+  
+}
+

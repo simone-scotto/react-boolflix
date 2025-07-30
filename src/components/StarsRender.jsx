@@ -21,13 +21,13 @@ export default function StarRating ({voteAverage}) {
      
     
     return (
-       <p>
+       <p>Media voto: 
         
             { maxStars.map((_,index) => {
                 return (
                     // confronto la costante stars che indica il numero di stelle di ogni film con l'index di ogni elemento di maxStar
                     // se il valore di stars è maggiore dell index iterato allora stamo la stella piena quando diventa uguale (partendo l'index da 0) o minore all index stampo la stella vuota
-                    <span key={index}>{stars > index ? "★" : "☆"}</span>
+                    <span className="text-warning" key={index}>{stars > index ? "★" : "☆"}</span>
                 )
                 
             })}

@@ -22,8 +22,6 @@ function App() {
   const urlMovies = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${query}`;
 
 
-  const urlImg = `https://image.tmdb.org/t/p/`
-
 // handle events 
   function handleClickMovies(e) {
     e.preventDefault()
@@ -50,8 +48,15 @@ function App() {
       });
     }
 
-    // rating stars
 
+// tagliare la descrizione per farla entrare nella card
+
+function tagliaDescrizione (text, maxWords) {
+  const singoleParole = text.split(" ")
+  const testoVisibile = singoleParole.slice(0, maxWords)
+  return testoVisibile.join(" ")
+
+}
     
       
     
@@ -104,24 +109,26 @@ function App() {
                   <div className="col" key={movie.id}>
                     
                       <div className="card h-100">
-                        <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt="immagine non disponibile" />
-                        <div className="card-body">
+                        <img className="card-img" src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt="immagine non disponibile" />
+                        <div className="card-img-overlay infos">
                           <h5 className="card-title">{movie.title}</h5>
-                          <p className="card-text">{movie.original_title}</p>
-                          <p className="card-text">{movie.original_language === "en" ? (
+                          <p className="card-text">Titolo Originale: {movie.original_title}</p>
+                          <p className="card-text">Lingua Originale: {movie.original_language === "en" ? (
                           <img src="/flags/united-states-of-america-flag-3d-icon-16.png" alt="US" />
-                        ) : movie.original_language === "fr" ? (
-                          <img src="/flags/france-flag-3d-icon-16.png" alt="France" />
-                        ) : movie.original_language === "ja" ? (
-                          <img src="\flags\japan-flag-3d-icon-16 (1).png" alt="Japan" />
-                        ): movie.original_language === "zh" ? (
-                          <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
-                          <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
-                        )}</p>
-                        {/* <p> {ratingStar}{movie.vote_average} {movie.vote_average}</p> */}
-                        <StarRating voteAverage={movie.vote_average}/>
+                          ) : movie.original_language === "fr" ? (
+                            <img src="/flags/france-flag-3d-icon-16.png" alt="France" />
+                          ) : movie.original_language === "ja" ? (
+                            <img src="\flags\japan-flag-3d-icon-16 (1).png" alt="Japan" />
+                          ): movie.original_language === "zh" ? (
+                            <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
+                            <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
+                          )}</p>
+                          <p className="card-text">Trama: {tagliaDescrizione(movie.overview, 50)} </p>                  
+                          <StarRating voteAverage={movie.vote_average}/>
 
                         </div>
+                          
+                       
                       </div>
                     
                   </div>
@@ -143,21 +150,26 @@ function App() {
                   <div className="col" key={tvShow.id}>
                     
                       <div className="card h-100">
-                        <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${tvShow.poster_path}`} alt="immagine non disponibile" />
-                        <div className="card-body">
-                          <h5 className="card-title">{tvShow.name}</h5>
-                          <p className="card-text">{tvShow.original_name}</p>
-                          <p className="card-text">{tvShow.original_language === "en" ? (
+                        <img className="card-img" 
+
+                        
+                          src={tvShow.poster_path ? `https://image.tmdb.org/t/p/w342/${tvShow.poster_path}` : `/flags/anteprima-non-disponibile-2.jpg`}/>
+                        <div className="card-img-overlay infos">
+                          <h5 className="card-title">{tvShow.title}</h5>
+                          <p className="card-text">Titolo Originale: {tvShow.original_title}</p>
+                          <p className="card-text">Lingua Originale: {tvShow.original_language === "en" ? (
                           <img src="/flags/united-states-of-america-flag-3d-icon-16.png" alt="US" />
-                        ) : tvShow.original_language === "fr" ? (
-                          <img src="/flags/france-flag-3d-icon-16.png" alt="France" />
-                        ) : tvShow.original_language === "ja" ? (
-                          <img src="\flags\japan-flag-3d-icon-16 (1).png" alt="Japan" />
-                        ): tvShow.original_language === "zh" ? (
-                          <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
-                          <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
-                        )}</p>
-                        <p>{tvShow.vote_average}</p>
+                          ) : tvShow.original_language === "fr" ? (
+                            <img src="/flags/france-flag-3d-icon-16.png" alt="France" />
+                          ) : tvShow.original_language === "ja" ? (
+                            <img src="\flags\japan-flag-3d-icon-16 (1).png" alt="Japan" />
+                          ): tvShow.original_language === "zh" ? (
+                            <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
+                            <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
+                          )}</p>
+                          <p className="card-text">Trama: {tagliaDescrizione(tvShow.overview, 50)}</p>                  
+                          <StarRating voteAverage={tvShow.vote_average}/>
+
                         </div>
                       </div>
                     
