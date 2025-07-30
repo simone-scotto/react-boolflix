@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import { countries } from 'country-flag-icons'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode'
+import StarRating from "./components/StarsRender";
 /* import Header from "./components/Header";
 import Main from "./components/Main";
  */
@@ -23,7 +24,7 @@ function App() {
 
   const urlImg = `https://image.tmdb.org/t/p/`
 
-
+// handle events 
   function handleClickMovies(e) {
     e.preventDefault()
     
@@ -48,6 +49,12 @@ function App() {
 
       });
     }
+
+    // rating stars
+
+    
+      
+    
           
   return (
     <>
@@ -85,6 +92,8 @@ function App() {
       </header>
       <main>
         <div className="container">
+
+          {/* FILM */}
           <section className="movies">
             <h2>Film</h2>
             <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
@@ -109,7 +118,9 @@ function App() {
                           <img src="\flags\china-flag-3d-icon-16.png" alt="China" />) : (
                           <img src="/flags/un-flag-3d-icon-16.png" alt="Unknown" />
                         )}</p>
-                        <p>{movie.vote_average}</p>
+                        {/* <p> {ratingStar}{movie.vote_average} {movie.vote_average}</p> */}
+                        <StarRating voteAverage={movie.vote_average}/>
+
                         </div>
                       </div>
                     
@@ -119,6 +130,9 @@ function App() {
               })}
             </div>
           </section>
+
+
+          {/* SERIE TV */}
           <section className="tv">
             <h2>Serie TV</h2>
             <div className="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
